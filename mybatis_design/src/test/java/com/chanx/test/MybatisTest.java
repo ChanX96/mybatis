@@ -3,9 +3,9 @@ package com.chanx.test;
 import com.chanx.dao.UserDao;
 import com.chanx.domain.User;
 import com.chanx.mybatis.io.Resources;
-import com.chanx.sqlsession.SqlSession;
-import com.chanx.sqlsession.SqlSessionFactory;
-import com.chanx.sqlsession.SqlSessionFactoryBuilder;
+import com.chanx.mybatis.sqlsession.SqlSession;
+import com.chanx.mybatis.sqlsession.SqlSessionFactory;
+import com.chanx.mybatis.sqlsession.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;

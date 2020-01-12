@@ -1,4 +1,4 @@
-package com.chanx.sqlsession;
+package com.chanx.mybatis.sqlsession;
 
 public interface SqlSessionFactory {
 

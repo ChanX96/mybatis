@@ -1,4 +1,4 @@
-package com.chanx.sqlsession;
+package com.chanx.mybatis.sqlsession;
 
 /**
  * 自定义Mybatis中和数据库交互的核心类，可以创建dao的代理对象
