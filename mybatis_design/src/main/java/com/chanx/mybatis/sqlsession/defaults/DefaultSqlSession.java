@@ -3,8 +3,11 @@ package com.chanx.mybatis.sqlsession.defaults;
 import com.chanx.mybatis.cfg.Configuration;
 import com.chanx.mybatis.sqlsession.SqlSession;
 import com.chanx.mybatis.sqlsession.proxy.MapperProxy;
+import com.chanx.mybatis.utils.DataSourceUtil;
 
 import java.lang.reflect.Proxy;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * SqlSessionc的实现类
@@ -12,9 +15,12 @@ import java.lang.reflect.Proxy;
 public class DefaultSqlSession implements SqlSession {
 
     private Configuration cfg;
+    private Connection connection;
 
     public DefaultSqlSession(Configuration cfg) {
+
         this.cfg = cfg;
+        connection = DataSourceUtil.getConnection(cfg);
     }
 
     /**
@@ -25,8 +31,8 @@ public class DefaultSqlSession implements SqlSession {
      */
     @Override
     public <T> T getMapper(Class<T> daoInterfaceClass) {
-        Proxy.newProxyInstance(daoInterfaceClass.getClassLoader(), new Class[] {daoInterfaceClass}, new MapperProxy());
-        return null;
+
+        return (T) Proxy.newProxyInstance(daoInterfaceClass.getClassLoader(), new Class[]{daoInterfaceClass}, new MapperProxy(cfg.getMappers(), connection));
     }
 
     /**
@@ -35,5 +41,12 @@ public class DefaultSqlSession implements SqlSession {
     @Override
     public void close() {
 
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
