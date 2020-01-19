@@ -11,6 +11,7 @@
         <module>firstapp</module>
         <module>mybatis_annotation</module>
         <module>mybatis_design</module>
+        <module>mybatis_crud</module>
     </modules>
     <packaging>pom</packaging>
 

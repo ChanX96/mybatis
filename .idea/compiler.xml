@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="firstapp" />
         <module name="mybatis_annotation" />
+        <module name="mybatis_crud" />
         <module name="mybatis_design" />
       </profile>
     </annotationProcessing>
