@@ -12,6 +12,10 @@
         <module>mybatis_annotation</module>
         <module>mybatis_design</module>
         <module>mybatis_crud</module>
+        <module>mybatis_dao</module>
+        <module>data</module>
+        <module>datasourceAndTx</module>
+        <module>dynamicSQL</module>
     </modules>
     <packaging>pom</packaging>
 

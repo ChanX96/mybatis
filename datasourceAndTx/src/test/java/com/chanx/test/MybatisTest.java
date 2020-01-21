@@ -90,7 +90,7 @@ public class MybatisTest {
     @Test
     public void testUpdate() throws IOException {
         User user = new User();
-        user.setUserId(44);
+        user.setUserId(41);
         user.setUserName("张三");
         user.setUserAddress("河南省");
         user.setUserSex("女");

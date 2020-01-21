@@ -17,24 +17,6 @@ public interface UserDao {
     List<User> findAll();
 
     /**
-     * 保存方法
-     * @param user
-     */
-    void saveUser(User user);
-
-    /**
-     * 更新用户
-     * @param user
-     */
-    void updateUser(User user);
-
-    /**
-     * 根据id删除用户
-     * @param id
-     */
-    void deleteUser(Integer id);
-
-    /**
      * 根据id查询用户信息
      * @param id
      * @return
@@ -48,11 +30,6 @@ public interface UserDao {
      */
     List<User> findByName(String username);
 
-    /**
-     * 聚合操作，查询总用户数
-     * @return
-     */
-    int findTotal();
 
     /**
      * 根据QueryVo中的条件查询用户
@@ -60,4 +37,11 @@ public interface UserDao {
      * @return
      */
     List<User> findUserByVo(QueryVo vo);
+
+    /**
+     * 根据传入的条件查询
+     * @param user 有可能有用户名，也有可能有性别、地址或者生日，也有可能都没有
+     * @return
+     */
+    List<User> findUserByCondition(User user);
 }

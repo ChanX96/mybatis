@@ -68,49 +68,6 @@ public class MybatisTest {
     }
 
     /**
-     * 测试保存操作
-     */
-    @Test
-    public void testSave() throws IOException {
-        User user = new User();
-        user.setUserName("孙笑川");
-        user.setUserAddress("江津");
-        user.setUserSex("男");
-        user.setUserBirthday(new Date());
-        System.out.println("保存前: " + user);
-
-        // 5.保存对象
-        userDao.saveUser(user);
-        System.out.println("保存后: " + user);
-    }
-
-    /**
-     * 测试更新操作
-     */
-    @Test
-    public void testUpdate() throws IOException {
-        User user = new User();
-        user.setUserId(44);
-        user.setUserName("张三");
-        user.setUserAddress("河南省");
-        user.setUserSex("女");
-        user.setUserBirthday(new Date());
-
-        // 5.更新对象
-        userDao.updateUser(user);
-    }
-
-    /**
-     * 测试删除
-     */
-    @Test
-    public void testDelete() throws IOException {
-
-        // 5.删除对象
-        userDao.deleteUser(44);
-    }
-
-    /**
      * 测试查询一个方法
      */
     @Test
@@ -136,17 +93,6 @@ public class MybatisTest {
     }
 
     /**
-     * 测试查询总记录条数
-     */
-    @Test
-    public void testFindTotal() throws IOException {
-
-        // 5.查询总记录条数
-        int count = userDao.findTotal();
-        System.out.println(count);
-    }
-
-    /**
      * 测试使用QueryVo作为查询条件
      */
     @Test
@@ -159,6 +105,23 @@ public class MybatisTest {
 
         // 5.查询一个
         List<User> users = userDao.findUserByVo(vo);
+        for (User u : users) {
+            System.out.println(u);
+        }
+    }
+
+    /**
+     * 测试条件查询
+     */
+    @Test
+    public void testFindByCondition() {
+
+        User user = new User();
+//        user.setUserName("李老八");
+        user.setUserSex("男");
+
+        // 5.执行查询所有
+        List<User> users = userDao.findUserByCondition(user);
         for (User u : users) {
             System.out.println(u);
         }

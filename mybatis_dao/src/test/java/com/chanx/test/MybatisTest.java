@@ -1,7 +1,7 @@
 package com.chanx.test;
 
 import com.chanx.dao.UserDao;
-import com.chanx.domain.QueryVo;
+import com.chanx.dao.impl.UserDaoImpl;
 import com.chanx.domain.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -22,7 +22,6 @@ import java.util.List;
 public class MybatisTest {
 
     private InputStream in;
-    private SqlSession sqlSession;
     private UserDao userDao;
 
     /**
@@ -35,10 +34,8 @@ public class MybatisTest {
         in = Resources.getResourceAsStream("SqlMapConfig.xml");
         // 2.获取SqlSessionFactory对象
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
-        // 3.获取SqlSession对象
-        sqlSession = factory.openSession();
-        // 4.获取代理对象
-        userDao = sqlSession.getMapper(UserDao.class);
+        // 3.使用工厂对象创建Dao对象
+        userDao = new UserDaoImpl(factory);
     }
 
     /**
@@ -47,10 +44,6 @@ public class MybatisTest {
     @After
     public void destroy() throws IOException {
 
-        // 提交事务
-        sqlSession.commit();
-        // 6.释放资源
-        sqlSession.close();
         in.close();
     }
 
@@ -73,10 +66,10 @@ public class MybatisTest {
     @Test
     public void testSave() throws IOException {
         User user = new User();
-        user.setUserName("孙笑川");
-        user.setUserAddress("江津");
-        user.setUserSex("男");
-        user.setUserBirthday(new Date());
+        user.setUsername("李老八");
+        user.setAddress("成都");
+        user.setSex("男");
+        user.setBirthday(new Date());
         System.out.println("保存前: " + user);
 
         // 5.保存对象
@@ -90,11 +83,11 @@ public class MybatisTest {
     @Test
     public void testUpdate() throws IOException {
         User user = new User();
-        user.setUserId(44);
-        user.setUserName("张三");
-        user.setUserAddress("河南省");
-        user.setUserSex("女");
-        user.setUserBirthday(new Date());
+        user.setId(44);
+        user.setUsername("张三");
+        user.setAddress("河南省");
+        user.setSex("女");
+        user.setBirthday(new Date());
 
         // 5.更新对象
         userDao.updateUser(user);
@@ -117,7 +110,7 @@ public class MybatisTest {
     public void testFindOne() throws IOException {
 
         // 5.查询一个
-        User user = userDao.findById(32);
+        User user = userDao.findById(41);
         System.out.println(user);
     }
 
@@ -144,23 +137,5 @@ public class MybatisTest {
         // 5.查询总记录条数
         int count = userDao.findTotal();
         System.out.println(count);
-    }
-
-    /**
-     * 测试使用QueryVo作为查询条件
-     */
-    @Test
-    public void testFindByVo() throws IOException {
-
-        QueryVo vo = new QueryVo();
-        User user = new User();
-        user.setUserName("%老%");
-        vo.setUser(user);
-
-        // 5.查询一个
-        List<User> users = userDao.findUserByVo(vo);
-        for (User u : users) {
-            System.out.println(u);
-        }
     }
 }

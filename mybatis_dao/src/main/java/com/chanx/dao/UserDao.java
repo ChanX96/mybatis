@@ -1,6 +1,5 @@
 package com.chanx.dao;
 
-import com.chanx.domain.QueryVo;
 import com.chanx.domain.User;
 
 import java.util.List;
@@ -53,11 +52,4 @@ public interface UserDao {
      * @return
      */
     int findTotal();
-
-    /**
-     * 根据QueryVo中的条件查询用户
-     * @param vo
-     * @return
-     */
-    List<User> findUserByVo(QueryVo vo);
 }
