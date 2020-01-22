@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -122,6 +123,25 @@ public class MybatisTest {
 
         // 5.执行查询所有
         List<User> users = userDao.findUserByCondition(user);
+        for (User u : users) {
+            System.out.println(u);
+        }
+    }
+
+    /**
+     * 测试子查询foreach标签的使用
+     */
+    @Test
+    public void testFindUserInIds() {
+
+        QueryVo vo = new QueryVo();
+        List<Integer> list = new ArrayList<>();
+        list.add(45);
+        list.add(47);
+        vo.setIds(list);
+
+        // 5.执行查询所有
+        List<User> users = userDao.findUserInIds(vo);
         for (User u : users) {
             System.out.println(u);
         }

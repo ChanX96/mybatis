@@ -13,9 +13,13 @@
         <module>mybatis_design</module>
         <module>mybatis_crud</module>
         <module>mybatis_dao</module>
-        <module>data</module>
         <module>datasourceAndTx</module>
         <module>dynamicSQL</module>
+        <module>one2many</module>
+        <module>many2many</module>
+        <module>lazy</module>
+        <module>cache</module>
+        <module>annotation_mybatis</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -14,10 +14,15 @@
         <result property="userBirthday" column="birthday"></result>
     </resultMap>
 
+<!--    抽取重复的sql语句-->
+    <sql id="defaultUser">
+        SELECT * FROM user
+    </sql>
+
 <!--    查询所有-->
 <!--    <select id="findAll" resultType="com.chanx.domain.User">-->
     <select id="findAll" resultMap="userMap">
-        SELECT * FROM user;
+        <include refid="defaultUser"></include>
     </select>
 
 <!--    根据id查询用户-->
@@ -36,13 +41,38 @@
     </select>
 
 <!--    根据条件查询-->
+<!--    <select id="findUserByCondition" parameterType="User" resultMap="userMap">-->
+<!--        SELECT * FROM user WHERE 1=1-->
+<!--        <if test="userName != null ">-->
+<!--            AND username=#{userName}-->
+<!--        </if>-->
+<!--        <if test="userSex != null">-->
+<!--            AND sex=#{userSex}-->
+<!--        </if>-->
+<!--    </select>-->
+
+<!--    根据条件查询，<where>标签-->
     <select id="findUserByCondition" parameterType="User" resultMap="userMap">
-        SELECT * FROM user WHERE 1=1
-        <if test="userName != null ">
-            AND username=#{userName}
-        </if>
-        <if test="userSex != null">
-            AND sex=#{userSex}
-        </if>
+        SELECT * FROM user
+        <where>
+            <if test="userName != null ">
+                AND username=#{userName}
+            </if>
+            <if test="userSex != null">
+                AND sex=#{userSex}
+            </if>
+        </where>
+    </select>
+
+<!--    根据QueryVo中提供的id集合查询用户-->
+    <select id="findUserInIds" resultMap="userMap" parameterType="QueryVo">
+        SELECT * FROM user
+        <where>
+            <if test="ids != null and ids.size > 0">
+                <foreach collection="ids" open="and id in (" close=")" item="uid" separator=",">
+                    #{uid}
+                </foreach>
+            </if>
+        </where>
     </select>
 </mapper>

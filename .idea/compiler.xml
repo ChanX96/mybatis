@@ -9,12 +9,19 @@
         <module name="mybatis_crud" />
         <module name="mybatis_annotation" />
         <module name="firstapp" />
+        <module name="cache" />
+        <module name="lazy" />
+        <module name="one2many" />
         <module name="mybatis_dao" />
         <module name="datasourceAndTx" />
+        <module name="many2many" />
+        <module name="annotation_mybatis" />
         <module name="mybatis_design" />
         <module name="dynamicSQL" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel target="8">
+      <module name="jndi" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
